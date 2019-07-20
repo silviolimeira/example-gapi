@@ -1,0 +1,11 @@
+
+/c/Users/limeira/projetos/example-gapi
+
+Create auth service:
+$ ionic g service services/auth
+
+Firebase init:
+$ firebase init
+
+$ npm install firebase @angular/fire --save
+
