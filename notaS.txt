@@ -9,3 +9,5 @@ $ firebase init
 
 $ npm install firebase @angular/fire --save
 
+Test Google API 
+$ npm install --save @types/gapi
