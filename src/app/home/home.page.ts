@@ -23,24 +23,41 @@ export class HomePage {
       gapi.load("client", () => {
         console.log("loaded client");
 
-        gapi.client.init({
-          apiKey: "AIzaSyAoECXy7olOa0lZk7lP_yv9WWLOD8OyASc",
-          clientId:
-            "874036221463-40v1dfqisia5tqtehhf2nsjuf04lam9j.apps.googleusercontent.com",
-          discoveryDocs: [
-            "https://www.googleapis.com/discovery/v1/apis/urlshortener/v1/rest"
-          ]
+        gapi.client
+          .init({
+            apiKey: "AIzaSyB_uF09njEkWFN7FuAD_-Gu7ncioifWUxM",
+            scope: "https://www.googleapis.com/auth/calendar"
+          })
+          .then();
 
-          // discoveryDocs: [
-          //   "https://developers.google.com/apis-explorer/?hl=pt_BR#search/directory/admin/directory_v1/directory.members.hasMember?groupKey=02jxsxqh1ewkirf&memberKey=silvio.limeira%2540gedu.demo.mstech.com.br&_h=6&"
-          // ],
-          // scope: [
-          //   "https://www.googleapis.com/auth/admin.directory.group",
-          //   "https://www.googleapis.com/auth/admin.directory.group",
-          //   "https://www.googleapis.com/auth/admin.directory.group",
-          //   "https://www.googleapis.com/auth/admin.directory.group.readonly"
-          // ]
-        });
+        // gapi.client.init({
+        //   apiKey: "AIzaSyB_uF09njEkWFN7FuAD_-Gu7ncioifWUxM",
+        //   clientId:
+        //     "874036221463-40v1dfqisia5tqtehhf2nsjuf04lam9j.apps.googleusercontent.com",
+        //   // discoveryDocs: [
+        //   //   //   // "https://www.googleapis.com/discovery/v1/apis/urlshortener/v1/rest"
+
+        //   //   //   "https://www.googleapis.com/drive/v3/files?key=AIzaSyAoECXy7olOa0lZk7lP_yv9WWLOD8OyASc"
+        //   //   "https://www.googleapis.com/calendar/v3/users/me/calendarList?key=AIzaSyAoECXy7olOa0lZk7lP_yv9WWLOD8OyASc"
+        //   // ],
+        //   scope: [
+        //     "https://www.googleapis.com/auth/calendar",
+        //     "https://www.googleapis.com/auth/calendar",
+        //     "https://www.googleapis.com/auth/calendar.events",
+        //     "https://www.googleapis.com/auth/calendar.events.readonly",
+        //     "https://www.googleapis.com/auth/calendar.readonly"
+        //   ]
+
+        //   // discoveryDocs: [
+        //   //   "https://developers.google.com/apis-explorer/?hl=pt_BR#search/directory/admin/directory_v1/directory.members.hasMember?groupKey=02jxsxqh1ewkirf&memberKey=silvio.limeira%2540gedu.demo.mstech.com.br&_h=6&"
+        //   // ],
+        //   // scope: [
+        //   //   "https://www.googleapis.com/auth/admin.directory.group",
+        //   //   "https://www.googleapis.com/auth/admin.directory.group",
+        //   //   "https://www.googleapis.com/auth/admin.directory.group",
+        //   //   "https://www.googleapis.com/auth/admin.directory.group.readonly"
+        //   // ]
+        // });
 
         this.login();
       });
@@ -73,25 +90,45 @@ export class HomePage {
     });
   }
 
-  makerequest() {
-    function writeResponse(resp) {
-      console.log("resp: ", resp);
-      var responseText;
-      if (resp.code && resp.data[0].debugInfo == "QuotaState: BLOCKED") {
-        responseText =
-          'Invalid API key provided. Please replace the "apiKey" value with your own.';
-      } else {
-        responseText =
-          "Short URL http://goo.gl/fbsS expands to " + resp.longUrl;
+  makeRequest() {
+    var resource = {
+      summary: "Teste123",
+      location: "Teste123",
+      start: {
+        dateTime: "2019-07-20T19:00:00.000-07:00"
+      },
+      end: {
+        dateTime: "2019-07-20T19:25:00.000-07:00"
       }
-      var infoDiv = document.getElementById("info");
-      infoDiv.innerHTML = "";
-      infoDiv.appendChild(document.createTextNode(responseText));
-    }
-    // var shortUrl = document.getElementById('shortUrl').value;
-    var request = gapi.client.urlshortener.url.get({
-      shortUrl: "http://goo.gl/fbsS"
-    });
-    request.execute(writeResponse);
+    };
+
+    gapi.client
+      .request({
+        path: "/calendar/v3/calendars/primary/events",
+        method: "POST",
+        body: resource
+      })
+      .then(function(response) {
+        // this.writeResponse(resp.result);
+        console.log(response);
+        var creator = response.creator.email;
+        var calendarEntry = response.htmlLink;
+        var infoDiv = document.getElementById("info");
+        var infoMsg = document.createElement("P");
+        infoMsg.appendChild(
+          document.createTextNode(
+            "Calendar entry " + "successfully created by " + creator
+          )
+        );
+        infoDiv.appendChild(infoMsg);
+        var entryLink = document.createElement("A");
+        // entryLink.href = calendarEntry;
+        entryLink.appendChild(
+          document.createTextNode("View the Calendar entry")
+        );
+        infoDiv.appendChild(entryLink);
+      });
   }
+
+  writeResponse(response) {}
 }
