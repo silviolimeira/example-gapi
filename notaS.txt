@@ -11,3 +11,9 @@ $ npm install firebase @angular/fire --save
 
 Test Google API 
 $ npm install --save @types/gapi
+
+Google Cloud Platform:
+https://console.cloud.google.com/home/dashboard?project=rock-bonus-247016&authuser=2&folder=&organizationId=
+
+Teest Google Calendar API:
+https://developers.google.com/apis-explorer/#p/calendar/v3/
