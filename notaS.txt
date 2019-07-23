@@ -20,3 +20,7 @@ https://developers.google.com/apis-explorer/#p/calendar/v3/
 
 Cordova support google services:
 https://www.npmjs.com/package/cordova-support-google-services
+
+Set Up Google Play Services to Your Project Android:
+https://developers.google.com/android/guides/setup
+
