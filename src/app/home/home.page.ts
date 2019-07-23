@@ -95,10 +95,12 @@ export class HomePage {
       summary: "Teste123",
       location: "Teste123",
       start: {
-        dateTime: "2019-07-20T19:00:00.000-07:00"
+        dateTime: "2019-07-23T11:00:00.000-03:00",
+        timeZone: "America/Sao_Paulo"
       },
       end: {
-        dateTime: "2019-07-20T19:25:00.000-07:00"
+        dateTime: "2019-07-23T11:25:00.000-03:00",
+        timeZone: "America/Sao_Paulo"
       }
     };
 
