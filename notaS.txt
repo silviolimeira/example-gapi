@@ -17,3 +17,6 @@ https://console.cloud.google.com/home/dashboard?project=rock-bonus-247016&authus
 
 Teest Google Calendar API:
 https://developers.google.com/apis-explorer/#p/calendar/v3/
+
+Cordova support google services:
+https://www.npmjs.com/package/cordova-support-google-services
