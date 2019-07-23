@@ -25,6 +25,8 @@ export class HomePage {
 
         gapi.client
           .init({
+            clientId:
+              "874036221463-40v1dfqisia5tqtehhf2nsjuf04lam9j.apps.googleusercontent.com",
             apiKey: "AIzaSyB_uF09njEkWFN7FuAD_-Gu7ncioifWUxM",
             scope: "https://www.googleapis.com/auth/calendar"
           })
@@ -66,7 +68,8 @@ export class HomePage {
 
   async login() {
     const googleAuth = gapi.auth2.getAuthInstance();
-    const googleUser = await googleAuth.signIn();
+    // const googleUser = await googleAuth.signIn();
+    const googleUser = await googleAuth.singIn({ prompt: "none" });
 
     const token = googleUser.getAuthResponse().id_token;
 
@@ -112,7 +115,7 @@ export class HomePage {
       })
       .then(function(response) {
         // this.writeResponse(resp.result);
-        console.log(response);
+        console.log("response: ", response);
         var creator = response.creator.email;
         var calendarEntry = response.htmlLink;
         var infoDiv = document.getElementById("info");
