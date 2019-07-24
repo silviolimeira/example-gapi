@@ -24,12 +24,20 @@ export class HomePage {
         console.log("loaded client");
 
         gapi.client
-          .init({
-            clientId:
-              "874036221463-40v1dfqisia5tqtehhf2nsjuf04lam9j.apps.googleusercontent.com",
-            apiKey: "AIzaSyB_uF09njEkWFN7FuAD_-Gu7ncioifWUxM",
-            scope: "https://www.googleapis.com/auth/calendar"
-          })
+          .init(
+            //   {
+            //   clientId:
+            //     "874036221463-laae6a12j956ie1jbk725obi3lbkie57.apps.googleusercontent.com",
+            //   apiKey: "a8fb9b09685c44fc0a4627cfc54798bc19d8d0a1",
+            //   scope: "https://www.googleapis.com/auth/calendar"
+            // }
+            {
+              client_id:
+                "874036221463-2bhcrmnkpvm0lnaj3a275k7a1m653cos.apps.googleusercontent.com",
+              scope:
+                "openid https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/activity"
+            }
+          )
           .then();
 
         // gapi.client.init({
@@ -68,8 +76,8 @@ export class HomePage {
 
   async login() {
     const googleAuth = gapi.auth2.getAuthInstance();
-    // const googleUser = await googleAuth.signIn();
-    const googleUser = await googleAuth.singIn({ prompt: "none" });
+    const googleUser = await googleAuth.signIn();
+    // const googleUser = await googleAuth.singIn({ prompt: "none" });
 
     const token = googleUser.getAuthResponse().id_token;
 
